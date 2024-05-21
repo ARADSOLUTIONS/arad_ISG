@@ -4,7 +4,7 @@
 * POST https://ipg.aradly.com/api/v1/transaction
 
 
-## /start_pay
+## /start_spend
 
 ### Request
 
