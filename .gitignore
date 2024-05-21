@@ -15,7 +15,7 @@ server_main/.env
 __pycache__/
 *.py[cod]
 *$py.class
-/.idea/
+*/.idea/*
 
 # C extensions
 *.so
