@@ -4,8 +4,13 @@
 * POST https://ipg.aradly.com/api/v1/transaction
 
 
-## /start_spend
+## مرحله اول ارسال اطلاعات و دریافت توکن
 
+````
+POST
+https://ipg.aradly.com/api/v1/start_spend
+
+````
 ### Request
 
 ```json
@@ -22,13 +27,13 @@
       "price": 1320000,
       "product_uniqu_id": "550e8400-e29b-41d4-a716-446655440000 ",
       "quantity": 2,
-      "item_type": "Product",
+      "item_type": "PRODUCT",
       "name": "دوره آموزش ۲۰ ساعته پایتون"
     },
     {
       "price": 20000,
       "quantity": 1,
-      "item_type": "Discount",
+      "item_type": "DISCOUNT",
       "name": "تخفیف جشنواره"
     },
     {
@@ -49,10 +54,40 @@
   token: "secret_token"
 }
 ```
+| itme type | Description          |
+|-----------|----------------------|
+ PRODUCT   | محصول                |
+ VAT   | مالیات بر ارزش افرده |
+ DISCOUNT   | تخفیف                |
 
 
-# /transactions
+| Request Body Field | Description                                                       | required |
+|--------------------|-------------------------------------------------------------------|----------|
+ api_key            |                                                                   | true     |
+ amount                | مالیات بر ارزش افرده                                              | true     |
+ callback_url           | باید با آدرس درگاه پرداخت تایید شده در وندار بر روی یک دامنه باشد | true     |
+ mobile_number           | شماره موبایل کاربر                                                | false    |
+ order_no           | شماره فاکتور شما                                                  | true     |
+ details           | توضیحات حداکثر 255  char                                          | false    |
+ order_items           | موارد سفارش داده شده                                              | false    |
 
+
+
+
+# مرحله دوم  انتقال کاربر به صفحه درگاه پرداخت آراد
+
+````
+GET
+https://ipg.aradly.com/v1/?token={token}
+````
+
+
+# مرحله سوم  انتقال کاربر به صفحه پذیرنده و بررسی تراکنش
+
+```angular2html
+POST 
+https://ipg.aradly.com/api/v1/transaction
+```
 ### Request
 
 ```json
